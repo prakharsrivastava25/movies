@@ -1,0 +1,28 @@
+
+<div class="search">
+  <h1>
+    {{title}}
+  </h1>
+ <input [(ngModel)]="query" /> <button (click)="search()">Search</button>
+</div>
+<br>
+<section class="container">
+<ol *ngIf="movies"  infiniteScroll
+            [infiniteScrollDistance]="1"
+            [infiniteScrollThrottle]="300"
+            (scrolled)="onScroll()">
+  <ul *ngFor="let movie of movies" style="list-style: none;">
+    <li><img class="col-lg-6" style="float:left;"[src]="'http://image.tmdb.org/t/p/w300' + movie.poster_path" onerror="http://www.google.com"/>
+    <div id="details" class="col-lg-6">
+    <li><span>Title :</span> {{movie.title}}</li>
+    <li><span>Overview :</span> {{movie.overview}}</li>
+    <li><span>Release Date:</span>{{movie.release_date}}</li>
+    <li><span>Ratings:</span>{{movie.vote_average}}</li>
+    <li><span>Genre:</span>{{getGenreName(movie.genre_ids)}}</li>
+    <li><span>Add to Favourites: </span> <a (click)="favourite()"><i class="fa fa-heart"></i></a></li>
+  </div>
+  <div style="clear:both;"></div>
+  <hr>
+  </ul>
+</ol>
+</section>
